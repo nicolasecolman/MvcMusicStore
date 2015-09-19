@@ -16,6 +16,8 @@ namespace MvcMusicStore.Controllers
 
         public ActionResult Index()
         {
+            Guid a = Guid.NewGuid();
+
             var genres = storeDB.Genres.ToList();
             return View(genres);
         
