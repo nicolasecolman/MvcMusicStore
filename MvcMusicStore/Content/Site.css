@@ -325,3 +325,9 @@ tr:hover
 {
 	background-color: #fff;
 }
+
+.genre
+{
+    float: right;
+    width: 600px;
+}
