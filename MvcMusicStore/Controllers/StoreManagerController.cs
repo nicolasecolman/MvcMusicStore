@@ -19,7 +19,7 @@ namespace MvcMusicStore.Controllers
 
         public ViewResult Index()
         {
-            var albums = db.Albums.Include(a => a.Genre);
+            var albums = db.Albums.Include(a => a.Genre).Include(a => a.Artist);
             return View(albums.ToList());
         }
 
@@ -38,6 +38,7 @@ namespace MvcMusicStore.Controllers
         public ActionResult Create()
         {
             ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name");
+            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name");
             return View();
         } 
 
@@ -55,6 +56,7 @@ namespace MvcMusicStore.Controllers
             }
 
             ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", album.GenreId);
+            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);
             return View(album);
         }
         
@@ -65,6 +67,7 @@ namespace MvcMusicStore.Controllers
         {
             Album album = db.Albums.Find(id);
             ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", album.GenreId);
+            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);
             return View(album);
         }
 
@@ -81,6 +84,7 @@ namespace MvcMusicStore.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", album.GenreId);
+            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);
             return View(album);
         }
 
