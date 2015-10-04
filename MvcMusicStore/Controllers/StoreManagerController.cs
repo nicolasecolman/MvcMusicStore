@@ -37,8 +37,7 @@ namespace MvcMusicStore.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name");
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name");
+            this.SetGenreArtistViewBag();
             return View();
         } 
 
@@ -55,8 +54,7 @@ namespace MvcMusicStore.Controllers
                 return RedirectToAction("Index");  
             }
 
-            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", album.GenreId);
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);
+            this.SetGenreArtistViewBag(album.GenreId, album.ArtistId);
             return View(album);
         }
         
@@ -66,8 +64,7 @@ namespace MvcMusicStore.Controllers
         public ActionResult Edit(int id)
         {
             Album album = db.Albums.Find(id);
-            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", album.GenreId);
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);
+            this.SetGenreArtistViewBag(album.GenreId, album.ArtistId);
             return View(album);
         }
 
@@ -83,9 +80,23 @@ namespace MvcMusicStore.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", album.GenreId);
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);
+            this.SetGenreArtistViewBag(album.GenreId, album.ArtistId);
             return View(album);
+        }
+
+        private void SetGenreArtistViewBag(int? GenreId = null, int? ArtistId = null)
+        {
+            if(GenreId == null){
+                ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name");
+            }else{
+                ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", GenreId);
+            }
+
+            if(ArtistId == null){
+                ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name");
+            }else{
+                ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", ArtistId);
+            }
         }
 
         //
