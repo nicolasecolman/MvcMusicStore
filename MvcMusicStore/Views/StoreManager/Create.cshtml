@@ -14,12 +14,16 @@
     <fieldset>
         <legend>Album</legend>
 
-        <div class="editor-label">
+        <!--div class="editor-label">
             @Html.LabelFor(model => model.GenreId, "Genre")
-        </div>
-        <div class="editor-field">
+        </div-->
+        <div class="editor-field ui-widget">
+            <!--
             @Html.DropDownList("GenreId", String.Empty)
             @Html.ValidationMessageFor(model => model.GenreId)
+            -->
+            @Html.Partial("_ChooseGenre")
+
         </div>
 
         <div class="editor-label">

@@ -1,0 +1,18 @@
+﻿@model MvcMusicStore.Models.Album
+
+<div class="editor-label">
+
+    @Html.LabelFor(model => model.GenreId, "Genre" )
+
+</div>
+
+@Html.DropDownList("GenreId", String.Empty)
+
+<a class="button" href="@Url.Content("~/Genre/Create")" id="genreAddLink">Add New Genre</a>
+@Html.ValidationMessageFor(model => model.GenreId)
+
+<div id="genreDialog" class="hidden">
+</div>
+<link href="../../Content/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-ui.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/chooseGenre.js")"></script>
